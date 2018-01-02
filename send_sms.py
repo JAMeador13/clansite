@@ -1,10 +1,11 @@
 from twilio.rest import Client
+import confidential
 
-client = Client('ACf049ee52c4d5e94c3885a1c008d7d93f', 'fa792d0f44bc0a60bd93a88f78a195ce')
+client = Client(confidential.twilio_client_arg1, confidential.twilio_client_arg2)
 
-def sendSMS(message, num='(325) 864-2719'):
+def sendSMS(message, num=confidential.phone_num):
     client.messages.create(
-        from_='(325) 400-2855',
+        from_=confidential.twilio_num,
         to=num,
         body=message,
         )

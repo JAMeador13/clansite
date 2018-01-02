@@ -1,10 +1,10 @@
 import clan.models as mods
+import confidential
 
-HEADERS = {"X-API-Key":"be18f1d3b5674727b073af7dd46f5a75"}
+HEADERS = {"X-API-Key":confidential.bungie_api_key}
 
 base_path = 'http://www.bungie.net/Platform/'
 pgcr_uri = 'Destiny2/Stats/PostGameCarnageReport/'
-user_search = 'Destiny2/SearchDestinyPlayer/-1/jam time/'
 
 
 def clan_updater():

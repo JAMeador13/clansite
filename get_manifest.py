@@ -1,7 +1,8 @@
 import requests, zipfile, os, pickle, json, sqlite3
+import confidential
 
 
-HEADERS = {"X-API-Key":"be18f1d3b5674727b073af7dd46f5a75"}
+HEADERS = {"X-API-Key":confidential.bungie_api_key}
 
 
 def get_manifest():
