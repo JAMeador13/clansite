@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="http://www.clanomega.com/static/clan/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://www.clanomega.com/static/clan/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://www.clanomega.com/static/clan/favicon-16x16.png">
+    <link rel="manifest" href="http://www.clanomega.com/static/clan/manifest.json">
+    <link rel="mask-icon" href="http://www.clanomega.com/static/clan/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="http://www.clanomega.com/static/clan/clanstyle.css">
+    <script type="text/javascript" src="http://www.clanomega.com/static/clan/leagueteams.js"></script>
+    <title>Omega</title>
+</head>
+
+<body>
+
+<div class="w3-bar w3-display-container w3-opacity w3-hover-opacity-off" id="gb">
+   <a href="/" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">Home</a>
+   <a href="/streams/home" class="w3-bar-item w3-button w3-white w3-mobile" id="b" style="width:20%">Streams</a>
+   <a href="/league" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">League</a>
+   <a href="/stats" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">Stat Center</a>
+   <a href="/about" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">About</a>
+</div>
+
+<div class='w3-display-container w3-opacity' style='height:5px;background-color:#000000'></div>
+
+<div class="w3-bar w3-left w3-opacity w3-hover-opacity-off" id="gb" style="width:100%;overflow:hidden">
+    <a href="/streams/Multi-Stream/None/None/None/None" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">Multi Stream</a>
+    {% for k, v in streamers.items %}
+        {% if k == streamer %}
+            {% if v.2 == True %}
+                {% if v.3 != '' %}
+                    <a href="/streams/{{ k }}" class="w3-bar-item w3-left w3-button w3-white" id="b"><img src='{{ v.3 }}' style='{{ v.4 }}'> <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+                {% else %}
+                    <a href="/streams/{{ k }}" class="w3-bar-item w3-left w3-button w3-white" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if v.2 == True %}
+                {% if v.3 != '' %}
+                    <a href="/streams/{{ k }}" class="w3-bar-item w3-left w3-button w3-text-white" id="b"><img src='{{ v.3 }}' style='{{ v.4 }}'> <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+                {% else %}
+                    <a href="/streams/{{ k }}" class="w3-bar-item w3-left w3-button w3-text-white" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <div class="w3-dropdown-hover" id="gb">
+        <button class="w3-button w3-text-white" id="gb">Offline &#9660</button>
+        <div class="w3-dropdown-content w3-bar-block w3-card-4" id="g">
+            {% for k, v in streamers.items %}
+                {% if k == streamer %}
+                    {% if v.2 == False %}
+                        {% if v.3 != '' %}
+                            <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-white" id="b"><img src='{{ v.3 }}' style='{{ v.4 }}'>  <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+                        {% else %}
+                            <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-white" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {% if v.2 == False %}
+                        {% if v.3 != '' %}
+                            <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-text-white" id="b"><img src='{{ v.3 }}' style='{{ v.4 }}'>  <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+                        {% else %}
+                            <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-text-white" id="b">{{ k }}  <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class='w3-container' style='height:5px'></div>
+
+<div id="twitch-embed" class='w3-container w3-center'></div>
+<script src="https://embed.twitch.tv/embed/v1.js"></script>
+<script type="text/javascript">
+    new Twitch.Embed("twitch-embed", {
+        width: "100%",
+        height: 840,
+        channel: "{{ username }}"
+    });
+</script>
+
+<script>
+function showOffline() {
+    var x = document.getElementById("offline");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+
+
+</html>

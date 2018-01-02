@@ -1,0 +1,17 @@
+html {
+    background: url("http://www.clanomega.com/static/clan/omega-d2-logo-1200.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+#g {
+    background-color: #333;
+}
+
+#gb {
+    background-color: #333;
+    transition: 0.5s;
+}
+
+#b {
+    transition: 0.5s;
+}

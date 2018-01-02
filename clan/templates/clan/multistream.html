@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="http://www.clanomega.com/static/clan/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="http://www.clanomega.com/static/clan/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="http://www.clanomega.com/static/clan/favicon-16x16.png">
+    <link rel="manifest" href="http://www.clanomega.com/static/clan/manifest.json">
+    <link rel="mask-icon" href="http://www.clanomega.com/static/clan/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="http://www.clanomega.com/static/clan/clanstyle.css">
+    <script type="text/javascript" src="http://www.clanomega.com/static/clan/leagueteams.js"></script>
+    <title>Omega</title>
+</head>
+
+<body>
+
+<div class="w3-bar w3-display-container w3-opacity w3-hover-opacity-off" id="gb">
+   <a href="/" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">Home</a>
+   <a href="/streams/home" class="w3-bar-item w3-button w3-white w3-mobile" id="b" style="width:20%">Streams</a>
+   <a href="/league" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">League</a>
+   <a href="/stats" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">Stat Center</a>
+   <a href="/about" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b" style="width:20%">About</a>
+</div>
+
+<div class='w3-display-container w3-opacity' style='height:5px; background-color:#000000'></div>
+
+<div class="w3-container w3-opacity w3-hover-opacity-off" id="g">
+    <div class="w3-bar w3-left w3-opacity w3-hover-opacity-off" id="gb">
+        <a href="/streams/Multi-Stream/None/None/None/None" class="w3-bar-item w3-button w3-white w3-mobile">Multi Stream</a>
+        {% for k, v in streamers.items %}
+            {% if v.2 == True %}
+                {% if v.3 != '' %}
+                    <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b"><img src='{{ v.3 }}' style='{{ v.4 }}'> <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+                {% else %}
+                    <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <div class="w3-dropdown-hover" id="gb">
+            <button class="w3-button w3-text-white" id="gb">Offline &#9660</button>
+            <div class="w3-dropdown-content w3-bar-block w3-card-4" id="g">
+                {% for k, v in streamers.items %}
+                    {% if v.2 == False %}
+                        {% if v.3 != '' %}
+                            <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b"><img src='{{ v.3 }}' style='{{ v.4 }}'>  <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+                        {% else %}
+                            <a href="/streams/{{ k }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">{{ k }}  <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='w3-display-container w3-opacity' style='height:5px; background-color:#000000'></div>
+
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-black" style="display:none" id="topLeftMenu">
+    <button onclick="closeTopLeftMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    {% for k, v in streamers.items %}
+        {% if v.2 == True %}
+            {% if k == current_view.0.0 %}
+                <a href="/streams/Multi-Stream/{{ k }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-white w3-mobile" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ k }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% for k, v in streamers.items %}
+        {% if v.2 == False %}
+            {% if k == current_view.0.0 %}
+                <a href="/streams/Multi-Stream/{{ k }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-white w3-mobile" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ k }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-right w3-black" style="display:none;right:0" id="topRightMenu">
+    <button onclick="closeTopRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    {% for k, v in streamers.items %}
+        {% if v.2 == True %}
+            {% if k == current_view.1.0 %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ k }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-white w3-mobile" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ k }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% for k, v in streamers.items %}
+        {% if v.2 == False %}
+            {% if k == current_view.1.0 %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ k }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-white w3-mobile" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ k }}/{{ current_view.2.0 }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-text-white w3-mobile" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-black" style="display:none" id="botLeftMenu">
+    <button onclick="closeBotLeftMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    {% for k, v in streamers.items %}
+        {% if v.2 == True %}
+            {% if k == current_view.2.0 %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ k }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-white" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ k }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-text-white" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% for k, v in streamers.items %}
+        {% if v.2 == False %}
+            {% if k == current_view.2.0 %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ k }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-white" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ k }}/{{ current_view.3.0 }}" class="w3-bar-item w3-button w3-text-white" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="w3-sidebar w3-bar-block w3-card-2 w3-animate-right w3-black" style="display:none;right:0" id="botRightMenu">
+    <button onclick="closeBotRightMenu()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+    {% for k, v in streamers.items %}
+        {% if v.2 == True %}
+            {% if k == current_view.3.0 %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ k }}" class="w3-bar-item w3-button w3-white" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ k }}" class="w3-bar-item w3-button w3-text-white" id="b">{{ k }} <img src='http://thndl.com/images/1_3.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    {% for k, v in streamers.items %}
+        {% if v.2 == False %}
+            {% if k == current_view.3.0 %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ k }}" class="w3-bar-item w3-button w3-white" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% else %}
+                <a href="/streams/Multi-Stream/{{ current_view.0.0 }}/{{ current_view.1.0 }}/{{ current_view.2.0 }}/{{ k }}" class="w3-bar-item w3-button w3-text-white" id="b">{{ k }} <img src='http://www.clker.com/cliparts/X/9/P/m/2/g/transparent-red-circle-hi.png' style='height:20px;width:20px'></a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+<div class="w3-bar w3-display-container w3-opacity w3-hover-opacity-off" id="gb">
+    <div class="w3-third w3-bar" id="g">
+        <button class="w3-button w3-xlarge w3-text-white w3-left w3-hover-opacity-off" id="gb" onclick="openTopLeftMenu()">&#9776; Stream 1: {{ current_view.0.0 }}</button>
+    </div>
+    <div class="w3-third w3-bar" id="g">
+        <div class="w3-text-white w3-xxlarge w3-center" id="g">Multi-Stream</div>
+    </div>
+    <div class="w3-third w3-bar" id="g">
+        <button class="w3-button w3-xlarge w3-text-white w3-right w3-hover-opacity-off" id="gb" onclick="openTopRightMenu()">Stream 2: {{ current_view.1.0 }} &#9776;</button>
+    </div>
+</div>
+
+
+<div class="w3-row-padding w3-container">
+    <div class="w3-half">
+        {% if current_view.0.0 != "None" %}
+            <iframe
+                src="http://player.twitch.tv/?channel={{ current_view.0.2 }}&muted=true"
+                height="400"
+                width="100%"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen="false">
+            </iframe>
+        {% else %}
+            <img src="http://offline-gp.de/wp-content/uploads/2014/05/homepage_logo_black.png" style="height:400px;width:100%">
+        {% endif %}
+    </div>
+    <div class="w3-half">
+        {% if current_view.1.0 != "None" %}
+            <iframe
+                src="http://player.twitch.tv/?channel={{ current_view.1.2 }}&muted=true"
+                height="400"
+                width="100%"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen="false">
+            </iframe>
+        {% else %}
+            <img src="http://offline-gp.de/wp-content/uploads/2014/05/homepage_logo_black.png" style="height:400px;width:100%">
+        {% endif %}
+    </div>
+</div>
+
+<div class='w3-container' style='height:5px'></div>
+
+<div class="w3-row-padding w3-container">
+    <div class="w3-half">
+        {% if current_view.2.0 != "None" %}
+            <iframe
+                src="http://player.twitch.tv/?channel={{ current_view.2.2 }}&muted=true"
+                height="400"
+                width="100%"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen="false">
+            </iframe>
+        {% else %}
+            <img src="http://offline-gp.de/wp-content/uploads/2014/05/homepage_logo_black.png" style="height:400px;width:100%">
+        {% endif %}
+    </div>
+    <div class="w3-half">
+        {% if current_view.3.0 != "None" %}
+            <iframe
+                src="http://player.twitch.tv/?channel={{ current_view.3.2 }}&muted=true"
+                height="400"
+                width="100%"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen="false">
+            </iframe>
+        {% else %}
+            <img src="http://offline-gp.de/wp-content/uploads/2014/05/homepage_logo_black.png" style="height:400px;width:100%">
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="w3-bar w3-display-container w3-opacity w3-hover-opacity-off" id="gb">
+    <button class="w3-button w3-xlarge w3-text-white w3-left w3-hover-opacity-off" id="gb" onclick="openBotLeftMenu()">&#9776; Stream 3: {{ current_view.2.0 }}</button>
+    <button class="w3-button w3-xlarge w3-text-white w3-right w3-hover-opacity-off" id="gb" onclick="openBotRightMenu()">Stream 4: {{ current_view.3.0 }} &#9776;</button>
+</div>
+
+
+<script>
+function openTopLeftMenu() {
+    document.getElementById("topLeftMenu").style.display = "block";
+}
+function closeTopLeftMenu() {
+    document.getElementById("topLeftMenu").style.display = "none";
+}
+
+function openTopRightMenu() {
+    document.getElementById("topRightMenu").style.display = "block";
+}
+function closeTopRightMenu() {
+    document.getElementById("topRightMenu").style.display = "none";
+}
+function openBotLeftMenu() {
+    document.getElementById("botLeftMenu").style.display = "block";
+}
+function closeBotLeftMenu() {
+    document.getElementById("botLeftMenu").style.display = "none";
+}
+
+function openBotRightMenu() {
+    document.getElementById("botRightMenu").style.display = "block";
+}
+function closeBotRightMenu() {
+    document.getElementById("botRightMenu").style.display = "none";
+}
+</script>
+
+</body>
+
+</html>
