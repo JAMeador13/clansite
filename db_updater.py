@@ -6,7 +6,7 @@ django.setup()
 
 import logging, socket, sys
 import database_updaters
-import stats.models as mods
+import clan.models as mods
 
 lock_socket = None
 
@@ -30,11 +30,15 @@ if not is_lock_free():
 
 
 if mods.UpdateIndex.objects.filter(pk=1).exists():
+    print("Retrieving index...", end=" ")
     update_index = mods.UpdateIndex.objects.get(pk=1)
+    print("done!")
 else:
+    print("Creating index...", end=" ")
     update_index = mods.UpdateIndex.objects.create(weapons=True)
+    print("done!")
 
-print(update_index.__str__())
+print(update_index)
 
 
 def update_db():

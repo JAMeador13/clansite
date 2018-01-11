@@ -22,17 +22,17 @@ def is_lock_free():
     except socket.error:
         logging.info("Failed to acquire lock %r" % (lock_id,))
         return False
-"""
+
 if not is_lock_free():
     print("lock not free")
     sys.exit()
-"""
 
-#try:
-message = participant_updater()
-from send_sms import sendSMS
-sendSMS(message)
-"""
+
+try:
+    message = participant_updater()
+    from send_sms import sendSMS
+    sendSMS(message)
+
 except Exception:
     from send_sms import sendSMS
     import traceback, sys
@@ -42,4 +42,4 @@ except Exception:
     for i in traceback.format_exception(exc_type, exc_value, exc_traceback):
         message += str(i)
 
-    sendSMS(message)"""
+    sendSMS(message)

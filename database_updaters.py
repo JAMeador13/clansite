@@ -373,7 +373,8 @@ def participant_updater():
         fields = {
             "standing": p_dict["standing"],
             "score": p_dict["score"]["basic"]["value"],
-            "characterId": p_dict["characterId"]
+            "characterId": p_dict["characterId"],
+            "weapons": p_dict["extended"]["weapons"]
             }
 
         for k, v in p_dict["player"]["destinyUserInfo"].items():
@@ -426,7 +427,7 @@ def participant_updater():
                                     teamId=p_fields["team"],
                                     score=p_fields["score"],
                                     )
-                        """
+
                     elif not activity.private:
                         if int(p_fields["standing"]) == 0:
                             win = True
@@ -438,13 +439,13 @@ def participant_updater():
                             teamName="FFA",
                             teamId=-2.0,
                             score=p_fields["score"],
-                            victor=win
+                            is_winner=win
                             )
 
                         tcur += 1
                         tcursor.team_cursor = tcur
                         tcursor.save()
-                        """"""
+
                     else:
                         try:
                             team = activity.Teams.get(teamId=p_fields["team"])
@@ -473,13 +474,13 @@ def participant_updater():
                                 teamName="FFA",
                                 teamId=-2.0,
                                 score=p_fields["score"],
-                                victor=win
+                                is_winner=win
                                 )
 
                             tcur += 1
                             tcursor.team_cursor = tcur
                             tcursor.save()
-                        """
+
                     try:
                         if not team.Participants.filter(displayName=p_fields["displayName"]).exists():
                             if mods.Player.objects.filter(membership_id=p_fields["membershipId"]).exists():

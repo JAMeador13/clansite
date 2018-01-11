@@ -64,7 +64,7 @@ class Team(models.Model):
 	teamName = models.CharField(max_length=30)
 	teamId = models.CharField(max_length=30)
 	score = models.FloatField(default=0)
-	is_winner = models.BooleanField(default=None)
+	is_winner = models.NullBooleanField(default=None, null=True, blank=True)
 
 	def __str__(self):
 		return str(self.activity.__str__()+" - "+self.teamName)
@@ -72,8 +72,9 @@ class Team(models.Model):
 
 class Participant(models.Model):
     related_team = models.ForeignKey(Team, related_name='Participants', db_index=True)
-    character = models.ForeignKey(Character, related_name='ParticipationInstances', null=True, blank=True)
+    character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='ParticipationInstances', null=True, blank=True)
     displayName = models.CharField(max_length=30, default='')
+    weapons = jsonfield.JSONField(default=list)
 
     def __str__(self):
         return str(self.related_team.__str__()+' - '+self.displayName)
@@ -89,7 +90,7 @@ class Participant(models.Model):
     averageScorePerLife = models.FloatField(default=0.0)
     bestSingleGameKills = models.FloatField(default=0.0)
     bestSingleGameScore = models.FloatField(default=0.0)
-    completed = models.BooleanField(default=None)
+    completed = models.NullBooleanField(default=None, null=True, blank=True)
     fastestCompletionMsForActivity = models.FloatField(default=0.0)
     activityCompletions = models.FloatField(default=0.0)
     activityDeaths = models.FloatField(default=0.0)
@@ -208,7 +209,7 @@ class Participant(models.Model):
     adventuresCompleted = models.FloatField(default=0.0)
     secondsPlayed = models.FloatField(default=0.0)
     activityDurationSeconds = models.FloatField(default=0.0)
-    standing = models.BooleanField(default=None)
+    standing = models.NullBooleanField(default=None, null=True, blank=True)
     suicides = models.FloatField(default=0.0)
     team = models.CharField(max_length=30)
     totalDeathDistance = models.FloatField(default=0.0)
@@ -310,9 +311,9 @@ class Participant(models.Model):
     supremacyAllyKillEnemyTagsCaptured = models.FloatField(default=0.0)
     supremacyOwnTagsRecovered = models.FloatField(default=0.0)
     supremacyAllyTagsRecovered = models.FloatField(default=0.0)
-    completedTrialsLostTicket = models.BooleanField(default=None)
-    completedTrialsPerfectTicket = models.BooleanField(default=None)
-    completedTrialsWonTicket = models.BooleanField(default=None)
+    completedTrialsLostTicket = models.NullBooleanField(default=None, null=True, blank=True)
+    completedTrialsPerfectTicket = models.NullBooleanField(default=None, null=True, blank=True)
+    completedTrialsWonTicket = models.NullBooleanField(default=None, null=True, blank=True)
 
 
 class Weapon(models.Model):

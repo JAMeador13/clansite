@@ -34,7 +34,7 @@ try:
 
 except Exception:
     from send_sms import sendSMS
-    import traceback, sys
+    import traceback
     exc_type, exc_value, exc_traceback = sys.exc_info()
     message = ""
 

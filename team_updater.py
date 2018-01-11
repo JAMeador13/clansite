@@ -23,10 +23,10 @@ def is_lock_free():
         logging.info("Failed to acquire lock %r" % (lock_id,))
         return False
 
-"""
+
 if not is_lock_free():
     sys.exit()
-"""
+
 try:
     message = team_updater()
     from send_sms import sendSMS
@@ -34,7 +34,7 @@ try:
 
 except Exception:
     from send_sms import sendSMS
-    import traceback, sys
+    import traceback
     exc_type, exc_value, exc_traceback = sys.exc_info()
     message = ""
 
